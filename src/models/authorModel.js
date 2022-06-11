@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
-const authorSchema = new mongoose.Schema( {
-    author_id: String,
+const newAuthorSchema = new mongoose.Schema( {
+    
     author_name: String,
     age:Number,
-    address:String
+    address:String,
+    ratings:Number,
+    author_id: String,
 
 }, { timestamps: true });
 
-module.exports = mongoose.model('Author', authorSchema)
+module.exports = mongoose.model('Author', newAuthorSchema)
