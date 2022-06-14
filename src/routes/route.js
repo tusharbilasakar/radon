@@ -3,7 +3,9 @@ const router = express.Router();
 // const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
-const commonMW = require ("../middlewares/commonMiddlewares")
+// const mwuserModel= require("../controllers/MWuserController")
+// const isfreeappuser =require("../middlewares/isFreeAppUserMW")
+const createuser= require ("../controllers/MWuserController")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
@@ -12,12 +14,18 @@ router.get("/test-me", function (req, res) {
 
 
 
-router.post("/createBook", BookController.createBook  )
+router.post("/createBook", BookController.createBook)
 
 
+const isFreeAppUser= function ( req, res, next) {
+    New = req.headers.isFreeAppUser
+        console.log("new")
+        if(New){
+        next()}
+        else res.send("the request is missing a mandatory header-isfreeappuser")
+    }
 
-
-router.post("/createUser", UserController.createUser)
+router.post("/createUser",isFreeAppUser,createuser.createuser)
 // router.get("/getUsersData", UserController.getUsersData)
 
 
